@@ -1,18 +1,23 @@
-import { ClerkProvider } from '@clerk/expo'
-import { tokenCache } from '@clerk/expo/token-cache'
-import { Stack } from 'expo-router'
-import "@/global.css"
+import { ClerkProvider } from "@clerk/expo";
+import { tokenCache } from "@clerk/expo/token-cache";
+import { Stack } from "expo-router";
+import "@/global.css";
+import { DefaultTheme, ThemeProvider, DarkTheme } from "@react-navigation/native";
+import { useColorScheme } from "react-native";
 
-const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!
+const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 
 if (!publishableKey) {
-  throw new Error('Add your Clerk Publishable Key to the .env file')
+  throw new Error("Add your Clerk Publishable Key to the .env file");
 }
 
 export default function RootLayout() {
+  const colorScheme = useColorScheme();
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
-      <Stack screenOptions={{ headerShown: false }} />
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+        <Stack screenOptions={{ headerShown: false }} />
+      </ThemeProvider>
     </ClerkProvider>
-  )
+  );
 }

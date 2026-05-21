@@ -1,6 +1,5 @@
 import { useAuth, useUser, useClerk, useUserProfileModal } from '@clerk/expo'
 import { AuthView, UserButton } from '@clerk/expo/native'
-import React from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity, ActivityIndicator } from 'react-native'
 
 export default function MainScreen() {
@@ -35,7 +34,6 @@ export default function MainScreen() {
           <Text>Hello {user?.firstName} {user?.lastName}</Text>
         </View>
       </View>
-      <UserButton />
       <TouchableOpacity style={styles.linkButton} onPress={presentUserProfile}>
         <Text style={styles.linkButtonText}>Manage Profile</Text>
       </TouchableOpacity>
